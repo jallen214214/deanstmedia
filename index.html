@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dean St in the Media</title>
+<meta name="description" content="Dean St in the Media: new music, good press and a reading list. A Dean St project.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a1330;
+    --ink-2: #111d45;
+    --royal: #1d3c8e;
+    --paper: #f6efe1;
+    --paper-dim: #a7abbb;
+    --signal: #9fb4ee;
+    --amber: #ffd9a3;
+    --line: rgba(246, 239, 225, .14);
+    --display: "Archivo Black", Impact, sans-serif;
+    --serif: "Instrument Serif", Georgia, serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    --gutter: clamp(16px, 4vw, 48px);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; overflow-x: clip; }
+  body {
+    color: var(--paper);
+    background:
+      radial-gradient(900px 620px at 50% -8%, rgba(246, 239, 225, .09), transparent 60%),
+      radial-gradient(ellipse at center, transparent 50%, rgba(2, 5, 15, .7) 100%),
+      var(--ink);
+    background-attachment: fixed;
+    font-family: var(--mono); font-size: 14px; line-height: 1.6;
+  }
+  body::after { /* film grain */
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 50; opacity: .09;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a { color: inherit; }
+  ::selection { background: var(--signal); color: var(--ink); }
+  main { overflow-x: clip; }
+
+  /* ---------- top bar ---------- */
+  .bar {
+    position: sticky; top: 0; z-index: 40;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    padding: 14px var(--gutter);
+    background: rgba(10, 19, 48, .82); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    text-transform: uppercase; font-size: 12px; letter-spacing: .08em;
+  }
+  .bar .mark { font-family: var(--display); letter-spacing: .02em; text-decoration: none; font-size: 15px; }
+  .bar .mark span { color: var(--signal); }
+  .bar nav { display: flex; gap: clamp(12px, 3vw, 28px); }
+  .bar nav a { text-decoration: none; color: var(--paper-dim); transition: color .2s; }
+  .bar nav a:hover { color: var(--signal); }
+  .live { display: inline-flex; align-items: center; gap: 8px; color: var(--paper-dim); }
+  .live i { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); animation: pulse 1.6s infinite; }
+  .clocks { display: flex; align-items: center; gap: 10px; white-space: nowrap; color: var(--paper); }
+  .clocks b { font-weight: 400; color: var(--paper-dim); margin-left: 6px; }
+  .clocks i { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 8px var(--amber); animation: pulse 1.6s infinite; }
+  @media (max-width: 900px) { .clocks { display: none; } }
+  @keyframes pulse { 50% { opacity: .25; } }
+
+  /* ---------- masthead ---------- */
+  .masthead { padding: clamp(24px, 5vw, 56px) var(--gutter) clamp(32px, 5vw, 56px); }
+  .meta { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+          text-transform: uppercase; font-size: 12px; letter-spacing: .12em; color: var(--paper-dim);
+          border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+  .wordmark {
+    font-family: var(--display);
+    font-size: clamp(58px, 15vw, 230px);
+    line-height: .84; letter-spacing: -.035em; text-transform: uppercase;
+    margin: clamp(20px, 4vw, 40px) 0;
+  }
+  .wordmark .row { display: block; white-space: nowrap; }
+  .wordmark em.dot { font-size: 1em; margin-left: .02em; }
+  .bar .mark span { font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: none; font-size: 1.15em; padding: 0 .1em; }
+  .wordmark .outline { color: transparent; -webkit-text-stroke: 2px var(--paper); }
+  .wordmark em {
+    font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: none;
+    color: var(--signal); letter-spacing: -.02em; font-size: .7em;
+  }
+  .deck { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 16px;
+          border-top: 1px solid var(--line); padding-top: 14px; }
+  .deck p { max-width: 520px; font-size: 15px; color: var(--paper-dim); }
+  .deck p b { color: var(--paper); font-weight: 600; }
+  .deck .issue { text-transform: uppercase; font-size: 12px; letter-spacing: .12em; color: var(--paper-dim); }
+
+  /* ---------- marquee ---------- */
+  .marquee {
+    overflow: hidden; background: var(--signal); color: var(--ink);
+    font-family: var(--display); text-transform: uppercase;
+    font-size: clamp(18px, 3vw, 30px); padding: 10px 0; rotate: -1.2deg; margin: 0 -20px;
+  }
+  .marquee .track { display: flex; width: max-content; animation: slide 30s linear infinite; }
+  .marquee span { padding-right: 1.2em; white-space: nowrap; }
+  .marquee span::after { content: "✺"; padding-left: 1.2em; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+
+  /* ---------- sections ---------- */
+  section { padding: clamp(64px, 9vw, 120px) var(--gutter); }
+  .label {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 32px;
+    text-transform: uppercase; letter-spacing: .12em; font-size: 12px; color: var(--paper-dim);
+  }
+  .label h2 { font-family: var(--display); color: var(--paper); font-size: clamp(28px, 5vw, 56px);
+              letter-spacing: -.02em; line-height: 1; font-weight: 400; }
+
+  /* ---------- latest release ---------- */
+  .release {
+    display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 5vw, 72px); align-items: center;
+  }
+  .sleeve { position: relative; aspect-ratio: 1; max-width: 440px; width: 72%; }
+  .sleeve .art {
+    position: absolute; inset: 0; z-index: 2; overflow: hidden;
+    background:
+      linear-gradient(135deg, transparent 48%, var(--ink) 48% 52%, transparent 52%),
+      radial-gradient(circle at 30% 30%, #c9d5f7, var(--signal) 40%, var(--royal));
+    box-shadow: 0 30px 80px rgba(0,0,0,.55);
+    display: grid; place-items: start; padding: 14px;
+    font-family: var(--display); color: var(--ink); font-size: 13px; text-transform: uppercase;
+  }
+  .sleeve .art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .sleeve .disc {
+    position: absolute; inset: 4%; z-index: 1; border-radius: 50%;
+    background:
+      radial-gradient(circle, var(--signal) 0 15%, var(--ink) 15.4% 16.2%, transparent 16.6%),
+      repeating-radial-gradient(circle, #0d1636 0 2px, #070b1c 2px 4px);
+    translate: 34% 0; animation: spin 5s linear infinite;
+    box-shadow: 0 0 0 1px var(--line);
+  }
+  @keyframes spin { to { rotate: 360deg; } }
+  .release .kicker { text-transform: uppercase; letter-spacing: .14em; font-size: 12px; color: var(--signal); }
+  .release h3 { font-family: var(--display); font-size: clamp(36px, 6vw, 84px); line-height: .92; letter-spacing: -.03em;
+                text-transform: uppercase; margin: 12px 0 10px; overflow-wrap: anywhere; }
+  .release .artist { font-family: var(--serif); font-style: italic; font-size: clamp(24px, 3vw, 36px); color: var(--paper); }
+  .release .facts { margin: 24px 0; display: grid; }
+  .release .facts div { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line);
+                        text-transform: uppercase; font-size: 12px; letter-spacing: .1em; }
+  .release .facts span:first-child { color: var(--paper-dim); }
+  .release .blurb { color: var(--paper-dim); max-width: 520px; margin-bottom: 24px; }
+  .release h3.long { font-size: clamp(26px, 3.4vw, 44px); line-height: 1; }
+  .release.swap .sleeve, .release.swap .info { animation: swapIn .6s cubic-bezier(.2,.7,.2,1) both; }
+  .release.swap .info { animation-delay: .06s; }
+  @keyframes swapIn { from { opacity: 0; transform: translateY(14px); } }
+
+  /* carousel controls */
+  .progress { height: 2px; background: var(--line); margin-top: clamp(28px, 4vw, 48px); overflow: hidden; }
+  .progress i { display: block; height: 100%; background: var(--signal); transform-origin: left; transform: scaleX(0); }
+  .progress i.run { animation: fill var(--dur, 7s) linear forwards; }
+  .carousel:hover .progress i, .carousel:focus-within .progress i { animation-play-state: paused; }
+  @keyframes fill { to { transform: scaleX(1); } }
+  .carousel-ctrl { display: flex; align-items: center; gap: 16px; margin-top: 16px; }
+  .count { font-size: 12px; letter-spacing: .12em; color: var(--paper-dim); white-space: nowrap; min-width: 64px; }
+  .count b { color: var(--paper); font-weight: 600; }
+  .thumbs { display: flex; gap: 10px; flex: 1; min-width: 0; overflow-x: auto; padding: 6px 2px; scrollbar-width: none; }
+  .thumbs::-webkit-scrollbar { display: none; }
+  .thumbs button {
+    flex: none; width: 60px; aspect-ratio: 1; padding: 0; border: 0; cursor: pointer; background: var(--ink-2);
+    opacity: .45; transition: opacity .2s, transform .2s, box-shadow .2s; outline-offset: 3px;
+  }
+  .thumbs button:hover { opacity: .8; }
+  .thumbs button[aria-current="true"] { opacity: 1; transform: translateY(-3px); box-shadow: 0 0 0 2px var(--signal); }
+  .thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ph { width: 100%; height: 100%; display: grid; place-items: start; padding: 8%;
+        font-family: var(--display); text-transform: uppercase; color: var(--ink); font-size: 9px; line-height: 1.1; text-align: left; }
+  .arrows { display: flex; gap: 8px; }
+  .arrows button {
+    width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: none;
+    color: var(--paper); font: inherit; font-size: 16px; cursor: pointer; transition: border-color .2s, color .2s;
+  }
+  .arrows button:hover { border-color: var(--signal); color: var(--signal); }
+  .pills { display: flex; flex-wrap: wrap; gap: 10px; }
+  .pills a { text-decoration: none; border: 1px solid var(--line); padding: 10px 18px; border-radius: 99px;
+             text-transform: uppercase; font-size: 12px; letter-spacing: .1em; transition: border-color .2s, color .2s, background .2s; }
+  .pills a:hover { border-color: var(--signal); color: var(--signal); }
+  .pills a.primary { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+  .pills a.primary:hover { background: var(--signal); border-color: var(--signal); color: var(--ink); }
+
+  /* ---------- press ---------- */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+  .filters button {
+    font: inherit; font-size: 12px; text-transform: uppercase; letter-spacing: .1em; cursor: pointer;
+    background: none; color: var(--paper-dim); border: 1px solid var(--line); padding: 8px 14px; border-radius: 99px;
+    transition: all .2s;
+  }
+  .filters button:hover { color: var(--paper); border-color: var(--paper-dim); }
+  .filters button[aria-pressed="true"] { background: var(--signal); color: var(--ink); border-color: var(--signal); }
+
+  .press { display: grid; grid-auto-flow: dense; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 1px;
+           background: var(--line); border: 1px solid var(--line); }
+  .story {
+    position: relative; background: var(--ink); padding: clamp(20px, 2.5vw, 32px);
+    display: flex; flex-direction: column; gap: 14px; min-height: 260px;
+    text-decoration: none; transition: background .25s, color .25s;
+  }
+  a.story:hover { background: var(--signal); color: var(--ink); }
+  a.story:hover .dim { color: var(--ink); }
+  .story .top { display: flex; justify-content: space-between; gap: 12px; text-transform: uppercase; font-size: 11px; letter-spacing: .12em; }
+  .story .subject { font-weight: 600; }
+  .dim { color: var(--paper-dim); transition: color .25s; }
+  .story h4 { font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 2.4vw, 32px); line-height: 1.08; }
+  .story blockquote { font-size: 13px; border-left: 2px solid currentColor; padding-left: 12px; }
+  .story .foot { margin-top: auto; display: flex; justify-content: space-between; gap: 12px; text-transform: uppercase; font-size: 11px; letter-spacing: .12em; }
+  .story .outlet { font-family: var(--display); font-size: 14px; letter-spacing: .02em; }
+  .story.feature { grid-column: span 2; }
+  .story.feature h4 { font-size: clamp(30px, 3.6vw, 48px); }
+  .story.empty { border: 1px dashed var(--line); background: var(--ink); }
+  .story.empty h4 { color: var(--paper-dim); font-style: italic; }
+
+  /* ---------- reading ---------- */
+  .pick {
+    display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(24px, 5vw, 72px); align-items: center;
+    background: var(--ink-2); border: 1px solid var(--line); padding: clamp(20px, 4vw, 48px); margin-bottom: clamp(40px, 6vw, 72px);
+  }
+  .book {
+    --c: var(--signal);
+    position: relative; aspect-ratio: 2 / 3; width: 100%;
+    background: var(--c); color: var(--ink);
+    padding: 10% 9%; display: flex; flex-direction: column; justify-content: space-between;
+    box-shadow: inset 6px 0 0 rgba(0,0,0,.18), inset 8px 0 0 rgba(255,255,255,.12), 0 18px 40px rgba(0,0,0,.45);
+    border-radius: 2px 4px 4px 2px; transition: transform .3s;
+  }
+  .book .bt { font-family: var(--display); text-transform: uppercase; line-height: .95; letter-spacing: -.01em; font-size: clamp(14px, 1.6vw, 20px); overflow-wrap: anywhere; }
+  .book .ba { font-family: var(--serif); font-style: italic; font-size: clamp(13px, 1.2vw, 16px); line-height: 1.1; }
+  .pick .book { max-width: 300px; justify-self: center; }
+  .pick .book .bt { font-size: clamp(22px, 3vw, 38px); }
+  .pick .book .ba { font-size: clamp(16px, 1.8vw, 22px); }
+  .pick .kicker { text-transform: uppercase; letter-spacing: .14em; font-size: 12px; color: var(--signal); }
+  .pick h3 { font-family: var(--display); text-transform: uppercase; font-size: clamp(32px, 5vw, 64px); line-height: .95; letter-spacing: -.03em; margin: 12px 0 6px; }
+  .pick .by { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2.4vw, 28px); }
+  .pick .why { margin: 20px 0 24px; color: var(--paper-dim); max-width: 560px; }
+  .pick .why b { color: var(--paper); font-weight: 600; }
+
+  .shelf { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap: clamp(20px, 3vw, 36px) clamp(16px, 2.4vw, 28px); }
+  .shelf .book { max-width: 170px; }
+  .shelf .book .bt { font-size: 14px; overflow-wrap: normal; hyphens: auto; }
+  .shelf .book .ba { font-size: 13px; }
+  .shelf article { display: flex; flex-direction: column; gap: 12px; }
+  .shelf article:hover .book { transform: translateY(-6px) rotate(-1.5deg); }
+  .shelf .cat { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--signal); }
+  .shelf p { font-size: 13px; color: var(--paper-dim); line-height: 1.5; }
+  .shelf a.find { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; text-decoration: none; color: var(--paper); }
+  .shelf a.find:hover { color: var(--signal); }
+
+  /* ---------- contact ---------- */
+  .contact { text-align: center; padding-bottom: clamp(48px, 8vw, 96px); }
+  .contact .kicker { text-transform: uppercase; letter-spacing: .14em; font-size: 12px; color: var(--paper-dim); }
+  .contact a.mail {
+    display: inline-block; margin: 20px 0 8px; text-decoration: none;
+    font-family: var(--display); font-size: clamp(26px, 6.4vw, 92px); letter-spacing: -.03em; line-height: 1;
+    overflow-wrap: anywhere; transition: color .2s;
+  }
+  .contact a.mail:hover { color: var(--signal); }
+  .contact a.mail span { color: var(--signal); }
+
+  footer {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    padding: 20px var(--gutter); border-top: 1px solid var(--line);
+    font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--paper-dim);
+  }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--signal); }
+
+  @media (max-width: 760px) {
+    .bar nav { display: none; }
+    .release { grid-template-columns: minmax(0, 1fr); }
+    .sleeve { width: 66%; }
+    .carousel-ctrl { flex-wrap: wrap; justify-content: space-between; }
+    .thumbs { order: 3; flex-basis: 100%; }
+    .thumbs button { width: 52px; }
+    .story.feature { grid-column: auto; }
+    .pick { grid-template-columns: minmax(0, 1fr); }
+    .pick .book { max-width: 200px; }
+    .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="mark" href="#top">DEAN ST <span>in the</span> MEDIA</a>
+  <nav>
+    <a href="#release">New releases</a>
+    <a href="#press">Press</a>
+    <a href="#reading">Reading</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="clocks" aria-label="Local times">
+    <span>LA<b data-tz="America/Los_Angeles"></b></span><i></i>
+    <span>NY<b data-tz="America/New_York"></b></span><i></i>
+    <span>LDN<b data-tz="Europe/London"></b></span>
+  </div>
+</header>
+
+<main id="top">
+  <div class="masthead">
+    <div class="meta">
+      <span>Est. 2018</span>
+      <span>LA · NY · LDN</span>
+      <span id="dateline">News desk</span>
+    </div>
+    <h1 class="wordmark" aria-label="Dean St in the Media">
+      <span class="row">Dean St</span>
+      <span class="row"><em>in the</em> <span class="outline">Media</span><em class="dot">.</em></span>
+    </h1>
+    <div class="deck">
+      <p>New music, <b>good press</b> and the books worth your time.</p>
+      <span class="issue">Releases · Press · Reading</span>
+    </div>
+  </div>
+
+  <div class="marquee" aria-hidden="true"><div class="track" id="marquee"></div></div>
+
+  <section id="release">
+    <div class="label"><h2>New releases</h2><span id="releaseLabel"></span></div>
+    <div class="carousel" id="carousel" role="region" aria-roledescription="carousel" aria-label="New releases">
+      <div class="release" id="releaseBox">
+        <div class="sleeve">
+          <div class="disc" aria-hidden="true"></div>
+          <div class="art" id="releaseArt"></div>
+        </div>
+        <div class="info" id="releaseInfo" aria-live="off">
+          <p class="kicker">Out now</p>
+          <h3 id="releaseTitle"></h3>
+          <p class="artist" id="releaseArtist"></p>
+          <div class="facts" id="releaseFacts"></div>
+          <p class="blurb" id="releaseBlurb"></p>
+          <div class="pills" id="releaseLinks"></div>
+        </div>
+      </div>
+      <div class="progress" aria-hidden="true"><i id="releaseProgress"></i></div>
+      <div class="carousel-ctrl">
+        <span class="count" id="releaseCount"></span>
+        <div class="thumbs" id="releaseThumbs" role="group" aria-label="Choose a release"></div>
+        <div class="arrows">
+          <button type="button" id="prevRelease" aria-label="Previous release">←</button>
+          <button type="button" id="nextRelease" aria-label="Next release">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="press">
+    <div class="label"><h2>Press</h2><span>The good stuff</span></div>
+    <div class="press" id="pressGrid"></div>
+  </section>
+
+  <section id="reading">
+    <div class="label"><h2>Reading</h2><span>The Dean St shelf</span></div>
+    <div class="pick" id="topPick"></div>
+    <div class="filters" id="shelfFilters" role="group" aria-label="Filter books by topic"></div>
+    <div class="shelf" id="shelf"></div>
+  </section>
+
+  <section id="contact" class="contact">
+    <p class="kicker">Press, partnerships, hellos</p>
+    <a class="mail" href="mailto:music@deanstmedia.com">music<span>@</span>deanstmedia.com</a>
+  </section>
+</main>
+
+<footer>
+  <span>Dean St in the Media · <span id="yr">2026</span></span>
+  <a href="https://deanst.co">A Dean St project ↗</a>
+  <span>Los Angeles · New York · London</span>
+</footer>
+
+<script>
+/* =====================================================================
+   EDIT EVERYTHING HERE. The page renders itself from these three lists.
+   ===================================================================== */
+
+// 1) New releases. The carousel rotates through these, newest first.
+//    art: cover image URL (leave "" for a drawn placeholder cover).
+//    links: the first one gets the solid button.
+const RELEASES = [
+  { title: "Tribeca", artist: "Nic Dean", label: "SANA / LISTEN TO THE KIDS", date: "Nov 6, 2026", format: "Single",
+    art: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ca/06/0e/ca060e59-8cda-7acf-192e-da85df1f1299/075679548016.jpg/600x600bb.jpg",
+    blurb: "The new single from Nic Dean. Comes with a sped-up version.",
+    links: [
+      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/tribeca-single/6829037786" },
+      { name: "Deezer", url: "https://www.deezer.com/album/1135131921" },
+    ] },
+  { title: "feel trip.", artist: "feel trip.", label: "Boom.Records", date: "Oct 30, 2026", format: "Album",
+    art: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/6d/9c/ea/6d9ceaee-0d52-49f9-c636-e4215ef3b99e/193436490702_feeltripfeeltripEP.jpg/600x600bb.jpg",
+    blurb: "The self-titled seven-track release from feel trip.",
+    links: [
+      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/feel-trip/6821017596" },
+      { name: "Deezer", url: "https://www.deezer.com/album/1117838012" },
+    ] },
+  { title: "living room", artist: "saint luke", label: "The Nest Records", date: "Oct 16, 2026", format: "Single",
+    art: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/42/0b/f6/420bf666-d301-0a81-c7ac-d92f87c2db57/193436486224_IMG.jpg/600x600bb.jpg",
+    blurb: "The new single from saint luke, following “the planner.”",
+    links: [
+      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/living-room-single/6809924363" },
+      { name: "Deezer", url: "https://www.deezer.com/album/1074076652" },
+    ] },
+  { title: "IMPULSIVE (REMIX)", artist: "Thekidszn & Jordan Adetunji", label: "SANA / LISTEN TO THE KIDS", date: "Oct 16, 2026", format: "Single",
+    art: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e8/4a/ba/e84aba44-bb5f-fca4-62d9-d32c612f8831/075679552167.jpg/600x600bb.jpg",
+    blurb: "Thekidszn and Jordan Adetunji on the remix.",
+    links: [
+      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/impulsive-remix-single/6819430222" },
+      { name: "Deezer", url: "https://www.deezer.com/album/1123036922" },
+    ] },
+  { title: "Vesper", artist: "Nic Dean", label: "SANA / LISTEN TO THE KIDS", date: "Oct 9, 2026", format: "Single",
+    art: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/37/73/89/377389a5-0e89-2992-0799-fdc3674ac2fe/075679552570.jpg/600x600bb.jpg",
+    blurb: "A new single from Nic Dean.",
+    links: [
+      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/vesper-single/6818357143" },
+      { name: "Deezer", url: "https://www.deezer.com/album/1117549922" },
+    ] },
+  { title: "Dance Fish 1", artist: "Oxis & torr", label: "Boom.Records", date: "Oct 9, 2026", format: "EP",
+    art: "https://static.qobuz.com/images/covers/r1/p1/f1cpwxe4op1r1_600.jpg",
+    blurb: "A five-track EP from Oxis and torr.",
+    links: [
+      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/dance-fish-1-ep/6813535081" },
+      { name: "Qobuz", url: "https://www.qobuz.com/fr-fr/album/dance-fish-1-oxis-and-torr/f1cpwxe4op1r1" },
+    ] },
+  { title: "Hark", artist: "Clyde Crooks", label: "The Nest Records", date: "Sep 18, 2026", format: "EP",
+    art: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/ac/a3/ef/aca3efa5-678e-a8c3-aadc-8fb885100709/193436485333_HARKCOVERFINAL.jpg/600x600bb.jpg",
+    blurb: "A six-track EP from Clyde Crooks.",
+    links: [
+      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/hark-ep/6806280512" },
+      { name: "Deezer", url: "https://www.deezer.com/album/1065224041" },
+    ] },
+  { title: "i cannot hear what you’re saying (feat. Edward Skeletrix)", artist: "matt proxy, Current Joys, never goodbye & Elijah Walker",
+    label: "SANA / LISTEN TO THE KIDS", date: "Sep 11, 2026", format: "Single",
+    art: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/2a/58/2e/2a582ed5-495e-da01-0e61-1e3392df8172/075679557636.jpg/600x600bb.jpg",
+    blurb: "A four-way collaboration featuring Edward Skeletrix.",
+    links: [
+      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/i-cannot-hear-what-youre-saying-feat-edward-skeletrix/6807593904" },
+    ] },
+  { title: "Playing the Game", artist: "Evan Blix", label: "Evan Blix", date: "Jul 16, 2026", format: "Single",
+    art: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/62/1a/f0/621af0a7-30bc-44f8-5a38-1947782a6d67/859741786144_cover.jpg/600x600bb.jpg",
+    blurb: "The latest single from Evan Blix.",
+    links: [
+      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/playing-the-game-single/6787247893" },
+      { name: "Deezer", url: "https://www.deezer.com/album/1020737141" },
+    ] },
+  { title: "Sirens", artist: "Nic Dean", label: "SANA / LISTEN TO THE KIDS", date: "May 8, 2026", format: "Single",
+    art: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/0c/f0/d3/0cf0d39f-6217-4e67-61fe-20b833f8df75/808391375772.jpg/600x600bb.jpg",
+    blurb: "Written and produced by Nic Dean, with Damien Lesimon.",
+    links: [
+      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/sirens/6811396688" },
+      { name: "Deezer", url: "https://www.deezer.com/album/1077116272" },
+    ] },
+];
+const ROTATE_SECONDS = 7;
+
+// 2) Press. One entry per article, newest first. Set feature: true for one big card.
+//    Leave url empty and it shows as a dashed "to fill" slot.
+//    Quotes are verbatim from the article; keep them short.
+const PRESS = [
+  { subject: "Grimes", outlet: "Stereogum", date: "Oct 9, 2026",
+    headline: "Grimes Releases “Accelerando” From New AI-Inspired (But Not AI-Generated) Album Psy Opera",
+    quote: "I was reminded why she became such a big deal in the first place.",
+    url: "https://stereogum.com/2514112/grimes-releases-accelerando-from-new-ai-inspired-but-not-ai-generated-album-psy-opera/music" },
+  { subject: "Grimes", outlet: "Interview Magazine", date: "Apr 20, 2026",
+    headline: "The Return of Grimes",
+    quote: "made her one of music’s most singular figures",
+    url: "https://www.interviewmagazine.com/music/the-return-of-grimes" },
+  { subject: "Winnie Harlow", outlet: "Forbes", date: "Apr 1, 2026",
+    headline: "Winnie Harlow Is Turning Visibility Into Power And Redefining What It Means To Be A CEO",
+    quote: "Harlow represents a new blueprint of leadership.",
+    url: "https://www.forbes.com/sites/maiahoskin/2026/04/01/winnie-harlow-is-turning-visibility-into-power-and-redefining-what-it-means-to-be-a-ceo/" },
+  { subject: "Winnie Harlow", outlet: "Essence", date: "Dec 9, 2025",
+    headline: "Winnie Harlow Partners With Incyte To Empower The Vitiligo Community",
+    quote: "has long been celebrated for her ability to redefine what beauty looks like",
+    url: "https://www.essence.com/beauty/winnie-harlow-incyte-vitiligo-partnership-resources-empowerment" },
+  { subject: "Winnie Harlow", outlet: "Harper’s Bazaar", date: "Sep 7, 2025",
+    headline: "Winnie Harlow Serves US Open Style Day and Night",
+    quote: "Winnie Harlow has given us a grand slam of final looks.",
+    url: "https://www.harpersbazaar.com/celebrity/latest/a66005041/winnie-harlow-us-open-style-day-to-night-afterparty/" },
+  { subject: "PARTYNEXTDOOR", outlet: "Billboard", date: "Feb 23, 2025",
+    headline: "PARTYNEXTDOOR & Drake’s ‘$ome $exy $ongs 4 U’ Debuts at No. 1 on Billboard 200",
+    quote: "It’s the first leader for PARTYNEXTDOOR",
+    url: "https://www.billboard.com/music/chart-beat/partynextdoor-drake-some-sexy-songs-4-u-number-one-billboard-200-chart-1235908274/" },
+  { subject: "PARTYNEXTDOOR", outlet: "NME", date: "Feb 20, 2025",
+    headline: "The 10 best Drake and PartyNextDoor collaborations",
+    quote: "the Toronto duo’s chemistry has been unmatched",
+    url: "https://www.nme.com/features/music-features/best-drake-partynextdoor-collaborations-3839696" },
+  { subject: "Office", outlet: "It’s Nice That", date: "Jun 3, 2024",
+    headline: "W—E Studio’s redesign for Office marks a final chapter for the magazine in print",
+    quote: "consistently powerful visual content",
+    url: "https://www.itsnicethat.com/articles/w-e-studio-office-magazine-issue-21-graphic-design-publication-project-030624" },
+];
+
+// 3) Reading. TOP_PICK is the featured book; SHELF is everything else.
+//    "color" sets the cover color of the drawn book.
+const TOP_PICK = {
+  title: "The Creative Act: A Way of Being",
+  author: "Rick Rubin",
+  color: "#1d3c8e",
+  why: "You spend your days <b>between artists and the people who back them</b>: labels, money, the business side. Rubin explains how artists actually think and work, from the producer who sat in the room with everyone from the Beastie Boys to Johnny Cash. It makes you better at the half of the job that isn't contracts, and it's short enough to reread.",
+};
+
+const SHELF = [
+  // Music business
+  { cat: "Music business", title: "All You Need to Know About the Music Business", author: "Donald S. Passman", color: "#f6efe1", note: "The industry bible. Deals, royalties, publishing, streaming. Updated every few years; get the latest edition." },
+  { cat: "Music business", title: "This Business of Music", author: "M. William Krasilovsky & Sidney Shemel", color: "#e0e0db", note: "The deeper legal and contract reference. Keep it on the desk next to Passman." },
+  { cat: "Music business", title: "How Music Works", author: "David Byrne", color: "#f6efe1", note: "How venues, technology and money shape the music itself. Includes a frank look at deal structures." },
+  { cat: "Music business", title: "Hit Men", author: "Fredric Dannen", color: "#e0e0db", note: "The classic history of the major-label power brokers. Know where the industry came from." },
+  { cat: "Music business", title: "The Song Machine", author: "John Seabrook", color: "#f6efe1", note: "Inside the hit factory: how modern pop gets written, produced and sold." },
+
+  // Negotiation & conflict
+  { cat: "Negotiation", title: "Never Split the Difference", author: "Chris Voss", color: "#1d3c8e", note: "Tactical empathy from an FBI hostage negotiator. Immediately usable on your next call." },
+  { cat: "Negotiation", title: "Getting to Yes", author: "Roger Fisher, William Ury & Bruce Patton", color: "#2449a6", note: "Separate the people from the problem. The foundation most negotiation thinking builds on." },
+  { cat: "Negotiation", title: "Bargaining for Advantage", author: "G. Richard Shell", color: "#253551", note: "The Wharton course in book form. Strong on preparation and leverage." },
+  { cat: "Negotiation", title: "Difficult Conversations", author: "Douglas Stone, Bruce Patton & Sheila Heen", color: "#16307a", note: "For the talks you dread: with clients, partners, family. From the Harvard Negotiation Project." },
+  { cat: "Negotiation", title: "Influence", author: "Robert B. Cialdini", color: "#1d3c8e", note: "Why people say yes. Read it to persuade better and to notice when it's being done to you." },
+
+  // Money & families (for the family-office side)
+  { cat: "Money & families", title: "The Psychology of Money", author: "Morgan Housel", color: "#ffd9a3", note: "Short essays on why smart people make strange money decisions. Great to hand to clients." },
+  { cat: "Money & families", title: "Family Wealth", author: "James E. Hughes Jr.", color: "#f3c98c", note: "A family-office classic on keeping a family, not just its money, intact across generations." },
+
+  // Meaning
+  { cat: "Meaning", title: "Man's Search for Meaning", author: "Viktor E. Frankl", color: "#9fb4ee", note: "A psychiatrist's account of surviving the camps, and why purpose is what keeps us going." },
+  { cat: "Meaning", title: "Meditations", author: "Marcus Aurelius", color: "#b9c8f2", note: "An emperor's private notes to himself on staying steady. Read a page a morning." },
+  { cat: "Meaning", title: "Four Thousand Weeks", author: "Oliver Burkeman", color: "#9fb4ee", note: "Time management for mortals. You'll never get it all done, so choose what matters." },
+  { cat: "Meaning", title: "Siddhartha", author: "Hermann Hesse", color: "#b9c8f2", note: "A short novel about a life spent looking for something. Hits differently every decade." },
+  { cat: "Meaning", title: "The Courage to Be Disliked", author: "Ichiro Kishimi & Fumitake Koga", color: "#9fb4ee", note: "Adlerian psychology as a dialogue. On freedom, approval and actually being happy." },
+];
+
+/* ===================================================================== */
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+// marquee (repeated for a seamless loop)
+const names = ["New music", "Good press", "Reading list", "LA \u00b7 NY \u00b7 LDN", "Dean St in the Media"].map(w => `<span>${esc(w)}</span>`).join("");
+$("marquee").innerHTML = names + names + names + names;
+
+// local clocks (LA / NY / LDN), like deanst.co
+function tick() {
+  document.querySelectorAll(".clocks b[data-tz]").forEach(b => {
+    b.textContent = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: b.dataset.tz }).format(new Date());
+  });
+}
+tick(); setInterval(tick, 30000);
+
+// releases carousel
+const PH_COLORS = ["#1d3c8e", "#253551", "#2449a6", "#16307a", "#3b4256", "#111d45"];
+const placeholder = (r, i) =>
+  `<div class="ph" style="background:radial-gradient(circle at 30% 30%, #fff3, transparent 60%), ${PH_COLORS[i % PH_COLORS.length]}">${esc(r.title)}</div>`;
+const pad = n => String(n).padStart(2, "0");
+let ri = 0;
+
+$("releaseThumbs").innerHTML = RELEASES.map((r, i) =>
+  `<button type="button" data-i="${i}" aria-label="${esc(r.artist)}: ${esc(r.title)}">${
+    r.art ? `<img src="${esc(r.art)}" alt="" loading="lazy">` : placeholder(r, i)}</button>`).join("");
+
+function showRelease(i, byUser) {
+  ri = (i + RELEASES.length) % RELEASES.length;
+  const r = RELEASES[ri];
+  $("releaseInfo").setAttribute("aria-live", byUser ? "polite" : "off");
+  $("releaseTitle").textContent = r.title;
+  $("releaseTitle").classList.toggle("long", r.title.length > 22);
+  $("releaseArtist").textContent = r.artist;
+  $("releaseLabel").textContent = r.label;
+  $("releaseBlurb").textContent = r.blurb || "";
+  $("releaseArt").innerHTML = r.art
+    ? `<img src="${esc(r.art)}" alt="${esc(r.title)} cover art">`
+    : `<span>${esc(r.label)}<br>${esc(r.format)}</span>`;
+  $("releaseArt").style.background = r.art ? "" : `radial-gradient(circle at 30% 30%, #fff3, transparent 60%), ${PH_COLORS[ri % PH_COLORS.length]}`;
+  $("releaseFacts").innerHTML = [["Label", r.label], ["Format", r.format], ["Out", r.date || "Now"]]
+    .map(([k, v]) => `<div><span>${k}</span><span>${esc(v)}</span></div>`).join("");
+  $("releaseLinks").innerHTML = r.links
+    .map((l, j) => `<a class="${j === 0 ? "primary" : ""}" href="${esc(l.url || "#")}" ${l.url ? 'target="_blank" rel="noopener"' : ""}>${esc(l.name)}${l.url ? " ↗" : ""}</a>`).join("");
+  $("releaseCount").innerHTML = `<b>${pad(ri + 1)}</b> / ${pad(RELEASES.length)}`;
+
+  // thumbnails: mark current and keep it in view without moving the page
+  const strip = $("releaseThumbs");
+  [...strip.children].forEach((b, j) => b.setAttribute("aria-current", j === ri));
+  const cur = strip.children[ri];
+  strip.scrollTo({ left: cur.offsetLeft - strip.clientWidth / 2 + cur.clientWidth / 2, behavior: "smooth" });
+
+  // replay the swap animation and restart the timer bar
+  const box = $("releaseBox"), bar = $("releaseProgress");
+  box.classList.remove("swap"); bar.classList.remove("run");
+  void box.offsetWidth;
+  box.classList.add("swap");
+  if (RELEASES.length > 1) bar.classList.add("run");
+}
+
+// the timer bar drives rotation; hovering or focusing the carousel pauses it (CSS)
+$("releaseProgress").style.setProperty("--dur", ROTATE_SECONDS + "s");
+$("releaseProgress").addEventListener("animationend", () => showRelease(ri + 1));
+$("prevRelease").addEventListener("click", () => showRelease(ri - 1, true));
+$("nextRelease").addEventListener("click", () => showRelease(ri + 1, true));
+$("releaseThumbs").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (b) showRelease(+b.dataset.i, true);
+});
+$("carousel").addEventListener("keydown", e => {
+  if (e.key === "ArrowRight") { showRelease(ri + 1, true); e.preventDefault(); }
+  if (e.key === "ArrowLeft")  { showRelease(ri - 1, true); e.preventDefault(); }
+});
+if (RELEASES.length < 2) document.querySelector(".carousel-ctrl").hidden = true;
+showRelease(0);
+
+// press
+function renderPress() {
+  $("pressGrid").innerHTML = PRESS.map(p => {
+    const filled = !!p.url;
+    const tag = filled ? "a" : "div";
+    const attrs = filled ? `href="${esc(p.url)}" target="_blank" rel="noopener"` : "";
+    const cls = ["story", p.feature ? "feature" : "", filled ? "" : "empty"].join(" ");
+    return `<${tag} class="${cls}" ${attrs}>
+      <div class="top"><span class="subject">${esc(p.subject)}</span><span class="dim">${esc(p.date)}</span></div>
+      <h4>${esc(p.headline)}</h4>
+      ${p.quote ? `<blockquote class="dim">“${esc(p.quote)}”</blockquote>` : ""}
+      <div class="foot"><span class="outlet">${esc(p.outlet)}</span><span class="dim">${filled ? "Read ↗" : "To fill"}</span></div>
+    </${tag}>`;
+  }).join("");
+}
+renderPress();
+
+// reading
+const find = b => "https://bookshop.org/search?keywords=" + encodeURIComponent(b.title + " " + b.author);
+// pick dark or light ink for a cover color
+const inkFor = hex => { const n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
+  return (0.299 * r + 0.587 * g + 0.114 * b) > 140 ? "var(--ink)" : "var(--paper)"; };
+const cover = b => `<div class="book" style="--c:${esc(b.color)};color:${inkFor(b.color)}" aria-hidden="true">
+  <span class="bt">${esc(b.title)}</span><span class="ba">${esc(b.author)}</span></div>`;
+
+$("topPick").innerHTML = `${cover(TOP_PICK)}
+  <div>
+    <p class="kicker">Top pick</p>
+    <h3>${esc(TOP_PICK.title)}</h3>
+    <p class="by">${esc(TOP_PICK.author)}</p>
+    <p class="why">${TOP_PICK.why}</p>
+    <div class="pills"><a class="primary" href="${find(TOP_PICK)}" target="_blank" rel="noopener">Find a copy ↗</a></div>
+  </div>`;
+
+let shelfActive = "All";
+function renderShelf() {
+  $("shelf").innerHTML = SHELF.filter(b => shelfActive === "All" || b.cat === shelfActive).map(b => `
+    <article>
+      ${cover(b)}
+      <span class="cat">${esc(b.cat)}</span>
+      <p>${esc(b.note)}</p>
+      <a class="find" href="${find(b)}" target="_blank" rel="noopener">Find it ↗</a>
+    </article>`).join("");
+}
+$("shelfFilters").innerHTML = ["All", ...new Set(SHELF.map(b => b.cat))]
+  .map(c => `<button type="button" aria-pressed="${c === shelfActive}">${esc(c)}</button>`).join("");
+$("shelfFilters").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  shelfActive = b.textContent;
+  [...$("shelfFilters").children].forEach(x => x.setAttribute("aria-pressed", x === b));
+  renderShelf();
+});
+renderShelf();
+
+// dateline + year
+const now = new Date();
+$("dateline").textContent = now.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+$("yr").textContent = now.getFullYear();
+</script>
+</body>
+</html>
