@@ -35,7 +35,7 @@
     font-family: var(--mono); font-size: 14px; line-height: 1.6;
   }
   body::after { /* film grain */
-    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 50; opacity: .09;
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 50; opacity: .05;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
   a { color: inherit; }
@@ -60,7 +60,7 @@
   .live i { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); animation: pulse 1.6s infinite; }
   .clocks { display: flex; align-items: center; gap: 10px; white-space: nowrap; color: var(--paper); }
   .clocks b { font-weight: 400; color: var(--paper-dim); margin-left: 6px; }
-  .clocks i { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 8px var(--amber); animation: pulse 1.6s infinite; }
+  .clocks i { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 6px var(--amber); }
   @media (max-width: 900px) { .clocks { display: none; } }
   @keyframes pulse { 50% { opacity: .25; } }
 
@@ -93,9 +93,9 @@
   .marquee {
     overflow: hidden; background: var(--signal); color: var(--ink);
     font-family: var(--display); text-transform: uppercase;
-    font-size: clamp(18px, 3vw, 30px); padding: 10px 0; rotate: -1.2deg; margin: 0 -20px;
+    font-size: clamp(14px, 2vw, 20px); padding: 8px 0; rotate: -.6deg; margin: 0 -20px;
   }
-  .marquee .track { display: flex; width: max-content; animation: slide 30s linear infinite; }
+  .marquee .track { display: flex; width: max-content; animation: slide 80s linear infinite; }
   .marquee span { padding-right: 1.2em; white-space: nowrap; }
   .marquee span::after { content: "✺"; padding-left: 1.2em; }
   @keyframes slide { to { transform: translateX(-50%); } }
@@ -130,13 +130,13 @@
     background:
       radial-gradient(circle, var(--signal) 0 15%, var(--ink) 15.4% 16.2%, transparent 16.6%),
       repeating-radial-gradient(circle, #0d1636 0 2px, #070b1c 2px 4px);
-    translate: 34% 0; animation: spin 5s linear infinite;
+    translate: 34% 0; animation: spin 24s linear infinite;
     box-shadow: 0 0 0 1px var(--line);
   }
   @keyframes spin { to { rotate: 360deg; } }
   .release .kicker { text-transform: uppercase; letter-spacing: .14em; font-size: 12px; color: var(--signal); }
   .release h3 { font-family: var(--display); font-size: clamp(36px, 6vw, 84px); line-height: .92; letter-spacing: -.03em;
-                text-transform: uppercase; margin: 12px 0 10px; overflow-wrap: anywhere; }
+                text-transform: uppercase; margin: 12px 0 10px; overflow-wrap: normal; }
   .release .artist { font-family: var(--serif); font-style: italic; font-size: clamp(24px, 3vw, 36px); color: var(--paper); }
   .release .facts { margin: 24px 0; display: grid; }
   .release .facts div { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line);
@@ -200,8 +200,8 @@
     display: flex; flex-direction: column; gap: 14px; min-height: 260px;
     text-decoration: none; transition: background .25s, color .25s;
   }
-  a.story:hover { background: var(--signal); color: var(--ink); }
-  a.story:hover .dim { color: var(--ink); }
+  a.story:hover { background: var(--ink-2); }
+  a.story:hover h4 { color: var(--signal); }
   .story .top { display: flex; justify-content: space-between; gap: 12px; text-transform: uppercase; font-size: 11px; letter-spacing: .12em; }
   .story .subject { font-weight: 600; }
   .dim { color: var(--paper-dim); transition: color .25s; }
@@ -243,7 +243,7 @@
   .shelf .book .bt { font-size: 14px; overflow-wrap: normal; hyphens: auto; }
   .shelf .book .ba { font-size: 13px; }
   .shelf article { display: flex; flex-direction: column; gap: 12px; }
-  .shelf article:hover .book { transform: translateY(-6px) rotate(-1.5deg); }
+  .shelf article:hover .book { transform: translateY(-4px); }
   .shelf .cat { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--signal); }
   .shelf p { font-size: 13px; color: var(--paper-dim); line-height: 1.5; }
   .shelf a.find { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; text-decoration: none; color: var(--paper); }
@@ -380,10 +380,16 @@
    ===================================================================== */
 
 // 1) New releases. The carousel rotates through these in order:
-//    Boom.Records and The Nest first (newest first), then SANA / LISTEN TO THE KIDS.
+//    Grimes first, then Boom.Records and The Nest (newest first), then SANA / LISTEN TO THE KIDS.
 //    art: cover image URL (leave "" for a drawn placeholder cover).
 //    links: the first one gets the solid button.
 const RELEASES = [
+  { title: "ACCELERANDO", artist: "Grimes & VADAKIN", label: "Eternal Recurrence", date: "Oct 9, 2026", format: "Single",
+    art: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/a6/72/fa/a672fa99-81d3-beb6-0dc5-1ea2099ec612/1200220158508.jpg/600x600bb.jpg",
+    blurb: "The first taste of Psy Opera, Grimes\u2019s first album in over six years.",
+    links: [
+      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/accelerando-single/6813724935" },
+    ] },
   { title: "feel trip.", artist: "feel trip.", label: "Boom.Records", date: "Oct 30, 2026", format: "Album",
     art: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/6d/9c/ea/6d9ceaee-0d52-49f9-c636-e4215ef3b99e/193436490702_feeltripfeeltripEP.jpg/600x600bb.jpg",
     blurb: "The self-titled seven-track release from feel trip.",
@@ -455,7 +461,7 @@ const RELEASES = [
       { name: "Deezer", url: "https://www.deezer.com/album/1077116272" },
     ] },
 ];
-const ROTATE_SECONDS = 7;
+const ROTATE_SECONDS = 10;
 
 // 2) Press. The order is mixed on purpose so the same artist never sits next to itself
 //    (the grid shows 1, 2 or 4 columns; a 3-column grid can't avoid repeats with this set).
@@ -565,6 +571,7 @@ function showRelease(i, byUser) {
   $("releaseInfo").setAttribute("aria-live", byUser ? "polite" : "off");
   $("releaseTitle").textContent = r.title;
   $("releaseTitle").classList.toggle("long", r.title.length > 22);
+  fitTitle();
   $("releaseArtist").textContent = r.artist;
   $("releaseLabel").textContent = r.label;
   $("releaseBlurb").textContent = r.blurb || "";
@@ -605,6 +612,15 @@ $("carousel").addEventListener("keydown", e => {
   if (e.key === "ArrowLeft")  { showRelease(ri - 1, true); e.preventDefault(); }
 });
 if (RELEASES.length < 2) document.querySelector(".carousel-ctrl").hidden = true;
+// shrink a title that has a single word too wide for its column (never break mid-word)
+function fitTitle() {
+  const h = $("releaseTitle");
+  h.style.fontSize = "";
+  let size = parseFloat(getComputedStyle(h).fontSize);
+  while (h.scrollWidth > h.clientWidth + 1 && size > 22) { size -= 2; h.style.fontSize = size + "px"; }
+}
+window.addEventListener("resize", fitTitle);
+document.fonts && document.fonts.ready.then(fitTitle);
 showRelease(0);
 
 // press
