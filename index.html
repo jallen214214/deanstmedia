@@ -191,8 +191,10 @@
   .filters button:hover { color: var(--paper); border-color: var(--paper-dim); }
   .filters button[aria-pressed="true"] { background: var(--signal); color: var(--ink); border-color: var(--signal); }
 
-  .press { display: grid; grid-auto-flow: dense; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 1px;
+  .press { display: grid; grid-auto-flow: dense; grid-template-columns: minmax(0, 1fr); gap: 1px;
            background: var(--line); border: 1px solid var(--line); }
+  @media (min-width: 700px)  { .press { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1400px) { .press { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   .story {
     position: relative; background: var(--ink); padding: clamp(20px, 2.5vw, 32px);
     display: flex; flex-direction: column; gap: 14px; min-height: 260px;
@@ -377,17 +379,11 @@
    EDIT EVERYTHING HERE. The page renders itself from these three lists.
    ===================================================================== */
 
-// 1) New releases. The carousel rotates through these, newest first.
+// 1) New releases. The carousel rotates through these in order:
+//    Boom.Records and The Nest first (newest first), then SANA / LISTEN TO THE KIDS.
 //    art: cover image URL (leave "" for a drawn placeholder cover).
 //    links: the first one gets the solid button.
 const RELEASES = [
-  { title: "Tribeca", artist: "Nic Dean", label: "SANA / LISTEN TO THE KIDS", date: "Nov 6, 2026", format: "Single",
-    art: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ca/06/0e/ca060e59-8cda-7acf-192e-da85df1f1299/075679548016.jpg/600x600bb.jpg",
-    blurb: "The new single from Nic Dean. Comes with a sped-up version.",
-    links: [
-      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/tribeca-single/6829037786" },
-      { name: "Deezer", url: "https://www.deezer.com/album/1135131921" },
-    ] },
   { title: "feel trip.", artist: "feel trip.", label: "Boom.Records", date: "Oct 30, 2026", format: "Album",
     art: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/6d/9c/ea/6d9ceaee-0d52-49f9-c636-e4215ef3b99e/193436490702_feeltripfeeltripEP.jpg/600x600bb.jpg",
     blurb: "The self-titled seven-track release from feel trip.",
@@ -401,20 +397,6 @@ const RELEASES = [
     links: [
       { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/living-room-single/6809924363" },
       { name: "Deezer", url: "https://www.deezer.com/album/1074076652" },
-    ] },
-  { title: "IMPULSIVE (REMIX)", artist: "Thekidszn & Jordan Adetunji", label: "SANA / LISTEN TO THE KIDS", date: "Oct 16, 2026", format: "Single",
-    art: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e8/4a/ba/e84aba44-bb5f-fca4-62d9-d32c612f8831/075679552167.jpg/600x600bb.jpg",
-    blurb: "Thekidszn and Jordan Adetunji on the remix.",
-    links: [
-      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/impulsive-remix-single/6819430222" },
-      { name: "Deezer", url: "https://www.deezer.com/album/1123036922" },
-    ] },
-  { title: "Vesper", artist: "Nic Dean", label: "SANA / LISTEN TO THE KIDS", date: "Oct 9, 2026", format: "Single",
-    art: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/37/73/89/377389a5-0e89-2992-0799-fdc3674ac2fe/075679552570.jpg/600x600bb.jpg",
-    blurb: "A new single from Nic Dean.",
-    links: [
-      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/vesper-single/6818357143" },
-      { name: "Deezer", url: "https://www.deezer.com/album/1117549922" },
     ] },
   { title: "Dance Fish 1", artist: "Oxis & torr", label: "Boom.Records", date: "Oct 9, 2026", format: "EP",
     art: "https://static.qobuz.com/images/covers/r1/p1/f1cpwxe4op1r1_600.jpg",
@@ -430,19 +412,40 @@ const RELEASES = [
       { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/hark-ep/6806280512" },
       { name: "Deezer", url: "https://www.deezer.com/album/1065224041" },
     ] },
-  { title: "i cannot hear what you’re saying (feat. Edward Skeletrix)", artist: "matt proxy, Current Joys, never goodbye & Elijah Walker",
-    label: "SANA / LISTEN TO THE KIDS", date: "Sep 11, 2026", format: "Single",
-    art: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/2a/58/2e/2a582ed5-495e-da01-0e61-1e3392df8172/075679557636.jpg/600x600bb.jpg",
-    blurb: "A four-way collaboration featuring Edward Skeletrix.",
-    links: [
-      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/i-cannot-hear-what-youre-saying-feat-edward-skeletrix/6807593904" },
-    ] },
   { title: "Playing the Game", artist: "Evan Blix", label: "Evan Blix", date: "Jul 16, 2026", format: "Single",
     art: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/62/1a/f0/621af0a7-30bc-44f8-5a38-1947782a6d67/859741786144_cover.jpg/600x600bb.jpg",
     blurb: "The latest single from Evan Blix.",
     links: [
       { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/playing-the-game-single/6787247893" },
       { name: "Deezer", url: "https://www.deezer.com/album/1020737141" },
+    ] },
+  { title: "Tribeca", artist: "Nic Dean", label: "SANA / LISTEN TO THE KIDS", date: "Nov 6, 2026", format: "Single",
+    art: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/ca/06/0e/ca060e59-8cda-7acf-192e-da85df1f1299/075679548016.jpg/600x600bb.jpg",
+    blurb: "The new single from Nic Dean. Comes with a sped-up version.",
+    links: [
+      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/tribeca-single/6829037786" },
+      { name: "Deezer", url: "https://www.deezer.com/album/1135131921" },
+    ] },
+  { title: "IMPULSIVE (REMIX)", artist: "Thekidszn & Jordan Adetunji", label: "SANA / LISTEN TO THE KIDS", date: "Oct 16, 2026", format: "Single",
+    art: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e8/4a/ba/e84aba44-bb5f-fca4-62d9-d32c612f8831/075679552167.jpg/600x600bb.jpg",
+    blurb: "Thekidszn and Jordan Adetunji on the remix.",
+    links: [
+      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/impulsive-remix-single/6819430222" },
+      { name: "Deezer", url: "https://www.deezer.com/album/1123036922" },
+    ] },
+  { title: "Vesper", artist: "Nic Dean", label: "SANA / LISTEN TO THE KIDS", date: "Oct 9, 2026", format: "Single",
+    art: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/37/73/89/377389a5-0e89-2992-0799-fdc3674ac2fe/075679552570.jpg/600x600bb.jpg",
+    blurb: "A new single from Nic Dean.",
+    links: [
+      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/vesper-single/6818357143" },
+      { name: "Deezer", url: "https://www.deezer.com/album/1117549922" },
+    ] },
+  { title: "i cannot hear what you’re saying (feat. Edward Skeletrix)", artist: "matt proxy, Current Joys, never goodbye & Elijah Walker",
+    label: "SANA / LISTEN TO THE KIDS", date: "Sep 11, 2026", format: "Single",
+    art: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/2a/58/2e/2a582ed5-495e-da01-0e61-1e3392df8172/075679557636.jpg/600x600bb.jpg",
+    blurb: "A four-way collaboration featuring Edward Skeletrix.",
+    links: [
+      { name: "Listen on Apple Music", url: "https://music.apple.com/us/album/i-cannot-hear-what-youre-saying-feat-edward-skeletrix/6807593904" },
     ] },
   { title: "Sirens", artist: "Nic Dean", label: "SANA / LISTEN TO THE KIDS", date: "May 8, 2026", format: "Single",
     art: "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/0c/f0/d3/0cf0d39f-6217-4e67-61fe-20b833f8df75/808391375772.jpg/600x600bb.jpg",
@@ -454,34 +457,30 @@ const RELEASES = [
 ];
 const ROTATE_SECONDS = 7;
 
-// 2) Press. One entry per article, newest first. Set feature: true for one big card.
-//    Leave url empty and it shows as a dashed "to fill" slot.
-//    Quotes are verbatim from the article; keep them short.
+// 2) Press. The order is mixed on purpose so the same artist never sits next to itself
+//    (the grid shows 1, 2 or 4 columns; a 3-column grid can't avoid repeats with this set).
+//    Quotes are word for word from the article; keep them short.
 const PRESS = [
   { subject: "Grimes", outlet: "Stereogum", date: "Oct 9, 2026",
     headline: "Grimes Releases “Accelerando” From New AI-Inspired (But Not AI-Generated) Album Psy Opera",
     quote: "I was reminded why she became such a big deal in the first place.",
     url: "https://stereogum.com/2514112/grimes-releases-accelerando-from-new-ai-inspired-but-not-ai-generated-album-psy-opera/music" },
-  { subject: "Grimes", outlet: "Interview Magazine", date: "Apr 20, 2026",
-    headline: "The Return of Grimes",
-    quote: "made her one of music’s most singular figures",
-    url: "https://www.interviewmagazine.com/music/the-return-of-grimes" },
   { subject: "Winnie Harlow", outlet: "Forbes", date: "Apr 1, 2026",
     headline: "Winnie Harlow Is Turning Visibility Into Power And Redefining What It Means To Be A CEO",
     quote: "Harlow represents a new blueprint of leadership.",
     url: "https://www.forbes.com/sites/maiahoskin/2026/04/01/winnie-harlow-is-turning-visibility-into-power-and-redefining-what-it-means-to-be-a-ceo/" },
-  { subject: "Winnie Harlow", outlet: "Essence", date: "Dec 9, 2025",
-    headline: "Winnie Harlow Partners With Incyte To Empower The Vitiligo Community",
-    quote: "has long been celebrated for her ability to redefine what beauty looks like",
-    url: "https://www.essence.com/beauty/winnie-harlow-incyte-vitiligo-partnership-resources-empowerment" },
-  { subject: "Winnie Harlow", outlet: "Harper’s Bazaar", date: "Sep 7, 2025",
-    headline: "Winnie Harlow Serves US Open Style Day and Night",
-    quote: "Winnie Harlow has given us a grand slam of final looks.",
-    url: "https://www.harpersbazaar.com/celebrity/latest/a66005041/winnie-harlow-us-open-style-day-to-night-afterparty/" },
   { subject: "PARTYNEXTDOOR", outlet: "Billboard", date: "Feb 23, 2025",
     headline: "PARTYNEXTDOOR & Drake’s ‘$ome $exy $ongs 4 U’ Debuts at No. 1 on Billboard 200",
     quote: "It’s the first leader for PARTYNEXTDOOR",
     url: "https://www.billboard.com/music/chart-beat/partynextdoor-drake-some-sexy-songs-4-u-number-one-billboard-200-chart-1235908274/" },
+  { subject: "Grimes", outlet: "Interview Magazine", date: "Apr 20, 2026",
+    headline: "The Return of Grimes",
+    quote: "made her one of music’s most singular figures",
+    url: "https://www.interviewmagazine.com/music/the-return-of-grimes" },
+  { subject: "Winnie Harlow", outlet: "Essence", date: "Dec 9, 2025",
+    headline: "Winnie Harlow Partners With Incyte To Empower The Vitiligo Community",
+    quote: "has long been celebrated for her ability to redefine what beauty looks like",
+    url: "https://www.essence.com/beauty/winnie-harlow-incyte-vitiligo-partnership-resources-empowerment" },
   { subject: "PARTYNEXTDOOR", outlet: "NME", date: "Feb 20, 2025",
     headline: "The 10 best Drake and PartyNextDoor collaborations",
     quote: "the Toronto duo’s chemistry has been unmatched",
@@ -490,6 +489,10 @@ const PRESS = [
     headline: "W—E Studio’s redesign for Office marks a final chapter for the magazine in print",
     quote: "consistently powerful visual content",
     url: "https://www.itsnicethat.com/articles/w-e-studio-office-magazine-issue-21-graphic-design-publication-project-030624" },
+  { subject: "Winnie Harlow", outlet: "Harper’s Bazaar", date: "Sep 7, 2025",
+    headline: "Winnie Harlow Serves US Open Style Day and Night",
+    quote: "Winnie Harlow has given us a grand slam of final looks.",
+    url: "https://www.harpersbazaar.com/celebrity/latest/a66005041/winnie-harlow-us-open-style-day-to-night-afterparty/" },
 ];
 
 // 3) Reading. TOP_PICK is the featured book; SHELF is everything else.
