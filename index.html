@@ -364,7 +364,7 @@
 
   <section id="contact" class="contact">
     <p class="kicker">Press, partnerships, hellos</p>
-    <a class="mail" href="mailto:music@deanstmedia.com">music<span>@</span>deanstmedia.com</a>
+    <a class="mail" href="mailto:support@deanst.co">support<span>@</span>deanst.co</a>
   </section>
 </main>
 
@@ -642,7 +642,7 @@ function renderPress() {
 renderPress();
 
 // reading
-const find = b => "https://bookshop.org/search?keywords=" + encodeURIComponent(b.title + " " + b.author);
+const find = b => "https://www.amazon.com/s?i=stripbooks&k=" + encodeURIComponent(b.title + " " + b.author);
 // pick dark or light ink for a cover color
 const inkFor = hex => { const n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
   return (0.299 * r + 0.587 * g + 0.114 * b) > 140 ? "var(--ink)" : "var(--paper)"; };
