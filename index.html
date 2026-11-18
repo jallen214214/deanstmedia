@@ -91,14 +91,14 @@
 
   /* ---------- marquee ---------- */
   .marquee {
-    overflow: hidden; color: var(--paper-dim);
+    overflow: hidden; color: var(--paper);
     border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
-    text-transform: uppercase; letter-spacing: .14em;
-    font-size: 12px; padding: 12px 0;
+    font-family: var(--display); text-transform: uppercase; letter-spacing: .01em;
+    font-size: clamp(18px, 2.4vw, 28px); padding: 14px 0;
   }
-  .marquee .track { display: flex; width: max-content; animation: slide 140s linear infinite; }
-  .marquee span { padding-right: 2em; white-space: nowrap; }
-  .marquee span::after { content: "·"; padding-left: 2em; color: var(--signal); }
+  .marquee .track { display: flex; align-items: center; width: max-content; animation: slide 160s linear infinite; }
+  .marquee span { padding: 0 .9em; white-space: nowrap; }
+  .marquee img { width: clamp(44px, 4.6vw, 60px); aspect-ratio: 1; object-fit: cover; border-radius: 4px; display: block; flex: none; }
   @keyframes slide { to { transform: translateX(-50%); } }
 
   /* ---------- sections ---------- */
@@ -212,6 +212,13 @@
   .story .outlet { font-family: var(--display); font-size: 14px; letter-spacing: .02em; }
   .story.feature { grid-column: span 2; }
   .story.feature h4 { font-size: clamp(30px, 3.6vw, 48px); }
+  .story .shot { margin: calc(-1 * clamp(20px, 2.5vw, 32px)) calc(-1 * clamp(20px, 2.5vw, 32px)) 4px;
+                 aspect-ratio: 16 / 10; overflow: hidden; background: var(--royal); position: relative; }
+  .story .shot img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
+  a.story:hover .shot img { transform: scale(1.04); }
+  .story .shot .tile { position: absolute; inset: 0; display: grid; place-items: center; padding: 8%;
+                       font-family: var(--display); text-transform: uppercase; text-align: center; line-height: .9;
+                       font-size: clamp(30px, 3.4vw, 48px); color: var(--ink); background: var(--signal); }
   .story.empty { border: 1px dashed var(--line); background: var(--ink); }
   .story.empty h4 { color: var(--paper-dim); font-style: italic; }
 
@@ -245,6 +252,9 @@
   .shelf .book .ba { font-size: 13px; }
   .shelf article { display: flex; flex-direction: column; gap: 12px; }
   .shelf article:hover .book { transform: translateY(-4px); }
+  .book .photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .shelf .bk { font-family: var(--serif); font-weight: 400; font-size: 19px; line-height: 1.1; }
+  .shelf .bka { font-size: 12px; color: var(--paper-dim); }
   .shelf .cat { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--signal); }
   .shelf p { font-size: 13px; color: var(--paper-dim); line-height: 1.5; }
   .shelf a.find { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; text-decoration: none; color: var(--paper); }
@@ -472,11 +482,13 @@ const PRESS = [
   { subject: "Grimes", outlet: "Stereogum", date: "Oct 9, 2026",
     headline: "Grimes Releases “Accelerando” From New AI-Inspired (But Not AI-Generated) Album Psy Opera",
     quote: "I was reminded why she became such a big deal in the first place.",
-    url: "https://stereogum.com/2514112/grimes-releases-accelerando-from-new-ai-inspired-but-not-ai-generated-album-psy-opera/music" },
+    url: "https://stereogum.com/2514112/grimes-releases-accelerando-from-new-ai-inspired-but-not-ai-generated-album-psy-opera/music",
+    img: "https://lede-admin.stereogum.com/wp-content/uploads/sites/64/2026/10/1200220158508.jpg" },
   { subject: "LISA", outlet: "Yahoo Entertainment", date: "Oct 23, 2026",
     headline: "LISA Pays Tribute to Tarantino With New Song & Music Video Inspired by His Movies",
     quote: "every single song has their own character, their own vibe",
-    url: "https://www.yahoo.com/entertainment/music/articles/tarantino-lyrics-lisa-pays-tribute-043555122.html" },
+    url: "https://www.yahoo.com/entertainment/music/articles/tarantino-lyrics-lisa-pays-tribute-043555122.html",
+    img: "https://s.yimg.com/lo/mysterio/api/8b584572cbe0fedc24378afa79fa09d9a429325c8b48448190f1cccf6cf3c21b/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_jpg/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fjust_jared_884%2F983e94b1fd0f5b22bdff9a452de157fc.jpg" },
   { subject: "Winnie Harlow", outlet: "Forbes", date: "Apr 1, 2026",
     headline: "Winnie Harlow Is Turning Visibility Into Power And Redefining What It Means To Be A CEO",
     quote: "Harlow represents a new blueprint of leadership.",
@@ -484,49 +496,60 @@ const PRESS = [
   { subject: "Stem", outlet: "Music Business Worldwide", date: "Mar 25, 2025",
     headline: "Stem Is Now the Most Well-Funded, Well-Supported Independent Player in the Distribution Space",
     quote: "Stem was the first company to offer an artist-facing dashboard",
-    url: "https://www.musicbusinessworldwide.com/stem-is-now-the-most-well-funded-well-supported-independent-player-in-the-distribution-space1/" },
+    url: "https://www.musicbusinessworldwide.com/stem-is-now-the-most-well-funded-well-supported-independent-player-in-the-distribution-space1/",
+    img: "https://www.musicbusinessworldwide.com/files/2025/03/Screenshot-2025-03-24-at-08.57.52-e1742925751300.jpg" },
   { subject: "Oxis", outlet: "Flaunt", date: "2025",
     headline: "Oxis | Under the Surface",
     quote: "There is a sense of playfulness in that endlessness",
-    url: "https://www.flaunt.com/post/oxis-under-the-surface" },
+    url: "https://www.flaunt.com/post/oxis-under-the-surface",
+    img: "https://cdn.prod.website-files.com/62ee0bbe0c783a903ecc0ddb/6a70e96f6be6bf097929f4fe_oxisflauntabigailreese-16.webp" },
   { subject: "PARTYNEXTDOOR", outlet: "Billboard", date: "Feb 23, 2025",
     headline: "PARTYNEXTDOOR & Drake’s ‘$ome $exy $ongs 4 U’ Debuts at No. 1 on Billboard 200",
     quote: "It’s the first leader for PARTYNEXTDOOR",
-    url: "https://www.billboard.com/music/chart-beat/partynextdoor-drake-some-sexy-songs-4-u-number-one-billboard-200-chart-1235908274/" },
+    url: "https://www.billboard.com/music/chart-beat/partynextdoor-drake-some-sexy-songs-4-u-number-one-billboard-200-chart-1235908274/",
+    img: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/65/a1/d8/65a1d809-dede-adf4-d85e-964070e77f58/808391285897.jpg/600x600bb.jpg" },
   { subject: "Day Fly", outlet: "Complex", date: "Dec 8, 2017",
     headline: "Premiere: Singer Beau Nox And Producer Rudy Jr Unite As Day Fly For “Do You Need Me?”",
     quote: "one of the most intriguing and unique voices in alternative pop",
-    url: "https://www.complex.com/music/a/aaron-bishop/premiere-day-fly-do-you-need-me" },
+    url: "https://www.complex.com/music/a/aaron-bishop/premiere-day-fly-do-you-need-me",
+    img: "https://images.complex.com/complex/image/upload/ar_1.91,c_fill,g_auto,q_auto/v1723867385/sanity-new/tmp-name-3-660-1670477461-74_16x9-6488230" },
   { subject: "Evan Ross", outlet: "Deadline", date: "May 2026",
     headline: "Natasha Lyonne, Sean Lennon & Evan Ross Launch Ariadne",
     url: "https://deadline.com/2026/05/natasha-lyonne-sean-lennon-evan-ross-ariadne-launch-1236907576/" },
   { subject: "Winnie Harlow", outlet: "Essence", date: "Dec 9, 2025",
     headline: "Winnie Harlow Partners With Incyte To Empower The Vitiligo Community",
     quote: "has long been celebrated for her ability to redefine what beauty looks like",
-    url: "https://www.essence.com/beauty/winnie-harlow-incyte-vitiligo-partnership-resources-empowerment" },
+    url: "https://www.essence.com/beauty/winnie-harlow-incyte-vitiligo-partnership-resources-empowerment",
+    img: "https://media.essence.com/essence_pubp/styles/card-social/2025/12/09/Winnie-Headshot-Cropped-2-scaled-1.jpg.webp?version=f65062e71e96" },
   { subject: "Grimes", outlet: "Interview Magazine", date: "Apr 20, 2026",
     headline: "The Return of Grimes",
     quote: "made her one of music’s most singular figures",
-    url: "https://www.interviewmagazine.com/music/the-return-of-grimes" },
+    url: "https://www.interviewmagazine.com/music/the-return-of-grimes",
+    img: "https://www.interviewmagazine.com/wp-content/uploads/2026/04/Interview_Issue-566_Spring-2026_Grimes_2-scaled-1-e1776882341565.jpg" },
   { subject: "TJ Maxx", outlet: "LBB", date: "Jun 16, 2026",
     headline: "TJ Maxx Puts Originality on the Rack with Diana Ross, Mindy Kaling, Ilona Maher and Chloe Flower",
     quote: "Always intend to be an original.",
-    url: "https://lbbonline.com/news/TJ-Maxx-Diana-Ross-Mindy-Kaling-Ilona-Maher-Chloe-Flower" },
+    url: "https://lbbonline.com/news/TJ-Maxx-Diana-Ross-Mindy-Kaling-Ilona-Maher-Chloe-Flower",
+    img: "https://d3q27bh1u24u2o.cloudfront.net/resized/1200/news_hero/2026-06/Diana-Ross.ntIZzFKH.png" },
   { subject: "Office", outlet: "It’s Nice That", date: "Jun 3, 2024",
     headline: "W—E Studio’s redesign for Office marks a final chapter for the magazine in print",
     quote: "consistently powerful visual content",
-    url: "https://www.itsnicethat.com/articles/w-e-studio-office-magazine-issue-21-graphic-design-publication-project-030624" },
+    url: "https://www.itsnicethat.com/articles/w-e-studio-office-magazine-issue-21-graphic-design-publication-project-030624",
+    img: "https://m.itsnicethat.com/original_images/WE_studio_Office_21_24051036.jpg?class=w1440" },
   { subject: "Honestly, Nevermind", outlet: "Complex", date: "Jun 17, 2022",
     headline: "Here Are the Full Production Credits for Drake’s ‘Honestly, Nevermind’",
-    url: "https://www.complex.com/music/a/zach-dionne/drake-honestly-nevermind-production-credits" },
+    url: "https://www.complex.com/music/a/zach-dionne/drake-honestly-nevermind-production-credits",
+    img: "https://images.complex.com/complex/image/upload/ar_1.91,c_fill,g_auto,q_auto/v1723844056/sanity-new/tmp-name-3-456-1670726836-225_16x9-6368512" },
   { subject: "PARTYNEXTDOOR", outlet: "NME", date: "Feb 20, 2025",
     headline: "The 10 best Drake and PartyNextDoor collaborations",
     quote: "the Toronto duo’s chemistry has been unmatched",
-    url: "https://www.nme.com/features/music-features/best-drake-partynextdoor-collaborations-3839696" },
+    url: "https://www.nme.com/features/music-features/best-drake-partynextdoor-collaborations-3839696",
+    img: "https://www.nme.com/wp-content/uploads/2025/02/drake-partynextdoor-credit-getty-johnny-nunez-wireimage.jpg" },
   { subject: "Winnie Harlow", outlet: "Harper’s Bazaar", date: "Sep 7, 2025",
     headline: "Winnie Harlow Serves US Open Style Day and Night",
     quote: "Winnie Harlow has given us a grand slam of final looks.",
-    url: "https://www.harpersbazaar.com/celebrity/latest/a66005041/winnie-harlow-us-open-style-day-to-night-afterparty/" },
+    url: "https://www.harpersbazaar.com/celebrity/latest/a66005041/winnie-harlow-us-open-style-day-to-night-afterparty/",
+    img: "https://hips.hearstapps.com/hmg-prod/images/winnie-us-open-68bf369ad121d.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:*" },
 ];
 
 // 3) Reading. TOP_PICK is the featured book; SHELF is everything else.
@@ -534,36 +557,36 @@ const PRESS = [
 const TOP_PICK = {
   title: "The Creative Act: A Way of Being",
   author: "Rick Rubin",
-  color: "#1d3c8e",
+  color: "#1d3c8e", cover: "https://covers.openlibrary.org/b/id/13316390-L.jpg",
   why: "You spend your days <b>between artists and the people who back them</b>: labels, money, the business side. Rubin explains how artists actually think and work, from the producer who sat in the room with everyone from the Beastie Boys to Johnny Cash. It makes you better at the half of the job that isn't contracts, and it's short enough to reread.",
 };
 
 const SHELF = [
   // Music business
-  { cat: "Music business", title: "All You Need to Know About the Music Business", author: "Donald S. Passman", color: "#f6efe1", note: "The industry bible. Deals, royalties, publishing, streaming. Updated every few years; get the latest edition." },
-  { cat: "Music business", title: "This Business of Music", author: "M. William Krasilovsky & Sidney Shemel", color: "#e0e0db", note: "The deeper legal and contract reference. Keep it on the desk next to Passman." },
-  { cat: "Music business", title: "How Music Works", author: "David Byrne", color: "#f6efe1", note: "How venues, technology and money shape the music itself. Includes a frank look at deal structures." },
-  { cat: "Music business", title: "Hit Men", author: "Fredric Dannen", color: "#e0e0db", note: "The classic history of the major-label power brokers. Know where the industry came from." },
-  { cat: "Music business", title: "The Song Machine", author: "John Seabrook", color: "#f6efe1", note: "Inside the hit factory: how modern pop gets written, produced and sold." },
+  { cat: "Music business", title: "All You Need to Know About the Music Business", author: "Donald S. Passman", color: "#f6efe1", cover: "https://covers.openlibrary.org/b/id/9129818-L.jpg", note: "The industry bible. Deals, royalties, publishing, streaming. Updated every few years; get the latest edition." },
+  { cat: "Music business", title: "This Business of Music", author: "M. William Krasilovsky & Sidney Shemel", color: "#e0e0db", cover: "https://covers.openlibrary.org/b/id/624683-L.jpg", note: "The deeper legal and contract reference. Keep it on the desk next to Passman." },
+  { cat: "Music business", title: "How Music Works", author: "David Byrne", color: "#f6efe1", cover: "https://covers.openlibrary.org/b/id/8867987-L.jpg", note: "How venues, technology and money shape the music itself. Includes a frank look at deal structures." },
+  { cat: "Music business", title: "Hit Men", author: "Fredric Dannen", color: "#e0e0db", cover: "https://covers.openlibrary.org/b/id/4094828-L.jpg", note: "The classic history of the major-label power brokers. Know where the industry came from." },
+  { cat: "Music business", title: "The Song Machine", author: "John Seabrook", color: "#f6efe1", cover: "https://covers.openlibrary.org/b/id/8903999-L.jpg", note: "Inside the hit factory: how modern pop gets written, produced and sold." },
 
   // Negotiation & conflict
-  { cat: "Negotiation", title: "Never Split the Difference", author: "Chris Voss", color: "#1d3c8e", note: "Tactical empathy from an FBI hostage negotiator. Immediately usable on your next call." },
-  { cat: "Negotiation", title: "Getting to Yes", author: "Roger Fisher, William Ury & Bruce Patton", color: "#2449a6", note: "Separate the people from the problem. The foundation most negotiation thinking builds on." },
-  { cat: "Negotiation", title: "Bargaining for Advantage", author: "G. Richard Shell", color: "#253551", note: "The Wharton course in book form. Strong on preparation and leverage." },
-  { cat: "Negotiation", title: "Difficult Conversations", author: "Douglas Stone, Bruce Patton & Sheila Heen", color: "#16307a", note: "For the talks you dread: with clients, partners, family. From the Harvard Negotiation Project." },
-  { cat: "Negotiation", title: "Influence", author: "Robert B. Cialdini", color: "#1d3c8e", note: "Why people say yes. Read it to persuade better and to notice when it's being done to you." },
+  { cat: "Negotiation", title: "Never Split the Difference", author: "Chris Voss", color: "#1d3c8e", cover: "https://covers.openlibrary.org/b/id/8365942-L.jpg", note: "Tactical empathy from an FBI hostage negotiator. Immediately usable on your next call." },
+  { cat: "Negotiation", title: "Getting to Yes", author: "Roger Fisher, William Ury & Bruce Patton", color: "#2449a6", cover: "https://covers.openlibrary.org/b/id/96165-L.jpg", note: "Separate the people from the problem. The foundation most negotiation thinking builds on." },
+  { cat: "Negotiation", title: "Bargaining for Advantage", author: "G. Richard Shell", color: "#253551", cover: "https://covers.openlibrary.org/b/id/402203-L.jpg", note: "The Wharton course in book form. Strong on preparation and leverage." },
+  { cat: "Negotiation", title: "Difficult Conversations", author: "Douglas Stone, Bruce Patton & Sheila Heen", color: "#16307a", cover: "https://covers.openlibrary.org/b/id/2555094-L.jpg", note: "For the talks you dread: with clients, partners, family. From the Harvard Negotiation Project." },
+  { cat: "Negotiation", title: "Influence", author: "Robert B. Cialdini", color: "#1d3c8e", cover: "https://covers.openlibrary.org/b/id/431011-L.jpg", note: "Why people say yes. Read it to persuade better and to notice when it's being done to you." },
 
   // Money & families (for the family-office side)
-  { cat: "Money & families", title: "The Psychology of Money", author: "Morgan Housel", color: "#ffd9a3", note: "Short essays on why smart people make strange money decisions. Great to hand to clients." },
-  { cat: "Money & families", title: "Family Wealth", author: "James E. Hughes Jr.", color: "#f3c98c", note: "A family-office classic on keeping a family, not just its money, intact across generations." },
+  { cat: "Money & families", title: "The Psychology of Money", author: "Morgan Housel", color: "#ffd9a3", cover: "https://covers.openlibrary.org/b/id/10389354-L.jpg", note: "Short essays on why smart people make strange money decisions. Great to hand to clients." },
+  { cat: "Money & families", title: "Family Wealth", author: "James E. Hughes Jr.", color: "#f3c98c", cover: "https://covers.openlibrary.org/b/id/8879509-L.jpg", note: "A family-office classic on keeping a family, not just its money, intact across generations." },
 
   // Meaning
-  { cat: "Meaning", title: "Stories of Your Life and Others", author: "Ted Chiang", color: "#b9c8f2", note: "Eight short stories that use science fiction to ask how to live. The title story, about a linguist who learns to see time differently, became the film Arrival." },
-  { cat: "Meaning", title: "Man's Search for Meaning", author: "Viktor E. Frankl", color: "#9fb4ee", note: "A psychiatrist's account of surviving the camps, and why purpose is what keeps us going." },
-  { cat: "Meaning", title: "Meditations", author: "Marcus Aurelius", color: "#b9c8f2", note: "An emperor's private notes to himself on staying steady. Read a page a morning." },
-  { cat: "Meaning", title: "Four Thousand Weeks", author: "Oliver Burkeman", color: "#9fb4ee", note: "Time management for mortals. You'll never get it all done, so choose what matters." },
-  { cat: "Meaning", title: "Siddhartha", author: "Hermann Hesse", color: "#b9c8f2", note: "A short novel about a life spent looking for something. Hits differently every decade." },
-  { cat: "Meaning", title: "The Courage to Be Disliked", author: "Ichiro Kishimi & Fumitake Koga", color: "#9fb4ee", note: "Adlerian psychology as a dialogue. On freedom, approval and actually being happy." },
+  { cat: "Meaning", title: "Stories of Your Life and Others", author: "Ted Chiang", color: "#b9c8f2", cover: "https://covers.openlibrary.org/b/isbn/9781101972120-L.jpg", note: "Eight short stories that use science fiction to ask how to live. The title story, about a linguist who learns to see time differently, became the film Arrival." },
+  { cat: "Meaning", title: "Man's Search for Meaning", author: "Viktor E. Frankl", color: "#9fb4ee", cover: "https://covers.openlibrary.org/b/isbn/9780807014295-L.jpg", note: "A psychiatrist's account of surviving the camps, and why purpose is what keeps us going." },
+  { cat: "Meaning", title: "Meditations", author: "Marcus Aurelius", color: "#b9c8f2", cover: "https://covers.openlibrary.org/b/id/211529-L.jpg", note: "An emperor's private notes to himself on staying steady. Read a page a morning." },
+  { cat: "Meaning", title: "Four Thousand Weeks", author: "Oliver Burkeman", color: "#9fb4ee", cover: "https://covers.openlibrary.org/b/id/11990973-L.jpg", note: "Time management for mortals. You'll never get it all done, so choose what matters." },
+  { cat: "Meaning", title: "Siddhartha", author: "Hermann Hesse", color: "#b9c8f2", cover: "https://covers.openlibrary.org/b/id/6562535-L.jpg", note: "A short novel about a life spent looking for something. Hits differently every decade." },
+  { cat: "Meaning", title: "The Courage to Be Disliked", author: "Ichiro Kishimi & Fumitake Koga", color: "#9fb4ee", cover: "https://covers.openlibrary.org/b/isbn/9781501197277-L.jpg", note: "Adlerian psychology as a dialogue. On freedom, approval and actually being happy." },
 ];
 
 /* ===================================================================== */
@@ -571,9 +594,16 @@ const SHELF = [
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-// marquee (repeated for a seamless loop)
-const names = ["New music", "Good press", "Reading list", "LA \u00b7 NY \u00b7 LDN", "Dean St in the Media"].map(w => `<span>${esc(w)}</span>`).join("");
-$("marquee").innerHTML = names + names + names + names;
+// marquee: words alternating with release artwork (repeated for a seamless loop)
+const words = ["New music", "Good press", "Reading list", "LA \u00b7 NY \u00b7 LDN", "Dean St in the Media"];
+const arts = RELEASES.filter(r => r.art);
+let tickerHTML = "";
+for (let i = 0; i < Math.max(words.length, arts.length); i++) {
+  tickerHTML += `<span>${esc(words[i % words.length])}</span>`;
+  const r = arts[i % arts.length];
+  if (r) tickerHTML += `<img src="${esc(r.art)}" alt="" loading="lazy">`;
+}
+$("marquee").innerHTML = tickerHTML + tickerHTML;
 
 // local clocks (LA / NY / LDN), like deanst.co
 function tick() {
@@ -659,7 +689,12 @@ function renderPress() {
     const tag = filled ? "a" : "div";
     const attrs = filled ? `href="${esc(p.url)}" target="_blank" rel="noopener"` : "";
     const cls = ["story", p.feature ? "feature" : "", filled ? "" : "empty"].join(" ");
+    const tile = `<span class="tile">${esc(p.outlet)}</span>`;
+    const shot = p.img
+      ? `<div class="shot"><img src="${esc(p.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML=this.dataset.tile" data-tile="${esc(tile)}"></div>`
+      : `<div class="shot">${tile}</div>`;
     return `<${tag} class="${cls}" ${attrs}>
+      ${shot}
       <div class="top"><span class="subject">${esc(p.subject)}</span><span class="dim">${esc(p.date)}</span></div>
       <h4>${esc(p.headline)}</h4>
       ${p.quote ? `<blockquote class="dim">“${esc(p.quote)}”</blockquote>` : ""}
@@ -674,8 +709,10 @@ const find = b => "https://www.amazon.com/s?i=stripbooks&k=" + encodeURIComponen
 // pick dark or light ink for a cover color
 const inkFor = hex => { const n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
   return (0.299 * r + 0.587 * g + 0.114 * b) > 140 ? "var(--ink)" : "var(--paper)"; };
+// real cover photo on top of a drawn cover; if the photo fails, the drawn one shows
 const cover = b => `<div class="book" style="--c:${esc(b.color)};color:${inkFor(b.color)}" aria-hidden="true">
-  <span class="bt">${esc(b.title)}</span><span class="ba">${esc(b.author)}</span></div>`;
+  <span class="bt">${esc(b.title)}</span><span class="ba">${esc(b.author)}</span>
+  ${b.cover ? `<img class="photo" src="${esc(b.cover)}" alt="" loading="lazy" onerror="this.remove()">` : ""}</div>`;
 
 $("topPick").innerHTML = `${cover(TOP_PICK)}
   <div>
@@ -691,6 +728,7 @@ function renderShelf() {
   $("shelf").innerHTML = SHELF.filter(b => shelfActive === "All" || b.cat === shelfActive).map(b => `
     <article>
       ${cover(b)}
+      <div><h4 class="bk">${esc(b.title)}</h4><span class="bka">${esc(b.author)}</span></div>
       <span class="cat">${esc(b.cat)}</span>
       <p>${esc(b.note)}</p>
       <a class="find" href="${find(b)}" target="_blank" rel="noopener">Find it ↗</a>
